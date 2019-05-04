@@ -1,4 +1,4 @@
-package main.jdbc;
+package main.oneToOne_1.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

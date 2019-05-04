@@ -1,7 +1,7 @@
-package main.hibernate.demo;
+package main.oneToOne_1.hibernate.demo;
 
-import main.hibernate.entity.Instructor;
-import main.hibernate.entity.InstructorDetail;
+import main.oneToOne_1.hibernate.entity.Instructor;
+import main.oneToOne_1.hibernate.entity.InstructorDetail;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
