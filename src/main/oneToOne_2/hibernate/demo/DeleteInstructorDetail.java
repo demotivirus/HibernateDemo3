@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class DeleteInstructor {
+public class DeleteInstructorDetail {
 
     public static void main(String[] args) {
 
@@ -21,22 +21,23 @@ public class DeleteInstructor {
         Session session = sessionFactory.getCurrentSession();
 
         try{
-
             //Start transaction
             session.beginTransaction();
 
-            //Get instructor by id
-            int theId = 1;
-            Instructor instructor = session.get(Instructor.class, theId);
-            System.out.println("Found instructor: " + instructor);
+            //Get the instructor detail
+            int theId = 3;
+            InstructorDetail instructorDetail =
+                    session.get(InstructorDetail.class, theId);
 
-            //Delete the instructors
-            if(instructor != null){
-                System.out.println("Deleting: " + instructor);
+            //Print the instructor detail
+            System.out.println("Instructor detail: " + instructorDetail);
 
-                //Delete all associate obj
-                session.delete(instructor);
-            }
+            //Print the associated instructor
+            System.out.println("The associated instructor " + instructorDetail.getInstructor());
+
+            //Delete the instructor detail
+            System.out.println("Deleting the instructor detail: " + instructorDetail);
+            session.delete(instructorDetail);
 
             //Commit transaction
             session.getTransaction().commit();
