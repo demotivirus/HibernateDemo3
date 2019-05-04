@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="hb-01-one-to-one-uni@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.3">
+    <root id="1"/>
+    <schema id="2" parent="1" name="hb-01-one-to-one-uni">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="employee_tracker"/>
+    <schema id="4" parent="1" name="hb_student_tracker"/>
+    <schema id="5" parent="1" name="information_schema"/>
+    <schema id="6" parent="1" name="mysql"/>
+    <schema id="7" parent="1" name="performance_schema"/>
+    <schema id="8" parent="1" name="sakila"/>
+    <schema id="9" parent="1" name="sys"/>
+    <schema id="10" parent="1" name="world"/>
+    <table id="11" parent="2" name="instructor"/>
+    <table id="12" parent="2" name="instructor_detail"/>
+    <column id="13" parent="11" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="14" parent="11" name="first_name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="15" parent="11" name="last_name">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="16" parent="11" name="email">
+      <Position>4</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="17" parent="11" name="instructor_detail_id">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="18" parent="11" name="FK_DETAIL_idx">
+      <ColNames>instructor_detail_id</ColNames>
+    </index>
+    <key id="19" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="20" parent="11" name="FK_DETAIL">
+      <ColNames>instructor_detail_id</ColNames>
+      <RefSchemaName>hb-01-one-to-one-uni</RefSchemaName>
+      <RefTableName>instructor_detail</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="21" parent="12" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="22" parent="12" name="youtube_channel">
+      <Position>2</Position>
+      <DataType>varchar(128)|0</DataType>
+    </column>
+    <column id="23" parent="12" name="hobby">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <key id="24" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
