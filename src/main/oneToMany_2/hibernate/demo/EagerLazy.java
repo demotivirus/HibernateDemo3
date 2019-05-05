@@ -32,14 +32,17 @@ public class EagerLazy {
             Instructor instructor = session.get(Instructor.class, theId);
 
             //Get courses for the instructor
-            System.out.println("Eager Instructor: " + instructor);
-            System.out.println("Eager Courses: " + instructor.getCourses());
-
-            
+            System.out.println("Eager/Lazy Instructor: " + instructor);
+            System.out.println("Eager/Lazy Courses: " + instructor.getCourses());
 
             //Commit transaction
             session.getTransaction().commit();
-            System.out.println("Eager Done!");
+
+            session.close();
+            System.out.println("\nNow session is closed\n");
+            System.out.println("Eager/Lazy Courses: " + instructor.getCourses());
+
+            System.out.println("Eager/lazy Done!");
 
         } finally {
             session.close();
