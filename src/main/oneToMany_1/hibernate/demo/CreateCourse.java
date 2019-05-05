@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class CreateInstructor {
+public class CreateCourse {
 
     public static void main(String[] args) {
 
@@ -24,20 +24,27 @@ public class CreateInstructor {
 
         try{
 
-            Instructor instructor = new Instructor("Bond", "James Bond", "007@agent.com");
-            InstructorDetail instructorDetail =
-                    new InstructorDetail("777", "Lock, Stock and Two Smoking Barrels");
-
-            //Associate obj
-            instructor.setInstructorDetail(instructorDetail);
-
             //Start transaction
             session.beginTransaction();
 
-            //Save the instructor
-            //All it's save because CascadeType.ALL
-            System.out.println("Saving instructor: " + instructor);
-            session.save(instructor);
+            //Get the instructor from DB
+            int theId = 2;
+            Instructor instructor = session.get(Instructor.class, theId);
+
+            //Create courses
+            Course course = new Course("Green screen fights");
+            Course course1 = new Course("Bullets & Guns");
+            Course course2 = new Course("Ho to become the star");
+
+            //Add courses to instructor
+            instructor.add(course);
+            instructor.add(course1);
+            instructor.add(course2);
+
+            //Save courses
+            session.save(course);
+            session.save(course1);
+            session.save(course2);
 
             //Commit transaction
             session.getTransaction().commit();
