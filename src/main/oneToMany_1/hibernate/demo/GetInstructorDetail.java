@@ -1,7 +1,7 @@
-package main.oneToOne_2.hibernate.demo;
+package main.oneToMany_1.hibernate.demo;
 
-import main.oneToOne_2.hibernate.entity.Instructor;
-import main.oneToOne_2.hibernate.entity.InstructorDetail;
+import main.oneToMany_1.hibernate.entity.Instructor;
+import main.oneToMany_1.hibernate.entity.InstructorDetail;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -12,7 +12,7 @@ public class GetInstructorDetail {
 
     //Create session factory
     SessionFactory sessionFactory = new Configuration()
-            .configure("main/oneToOne_2/hibernate.cfg.xml")
+            .configure("main/oneToMany_1/hibernate.cfg.xml")
             .addAnnotatedClass(Instructor.class)
             .addAnnotatedClass(InstructorDetail.class)
             .buildSessionFactory();

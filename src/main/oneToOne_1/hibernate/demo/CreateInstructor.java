@@ -12,7 +12,7 @@ public class CreateInstructor {
 
         //Create session factory
         SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
+                .configure("main/oneToOne_1/hibernate.cfg.xml")
                 .addAnnotatedClass(Instructor.class)
                 .addAnnotatedClass(InstructorDetail.class)
                 .buildSessionFactory();
