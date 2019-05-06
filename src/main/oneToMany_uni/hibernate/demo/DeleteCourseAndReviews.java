@@ -3,12 +3,12 @@ package main.oneToMany_uni.hibernate.demo;
 import main.oneToMany_uni.hibernate.entity.Course;
 import main.oneToMany_uni.hibernate.entity.Instructor;
 import main.oneToMany_uni.hibernate.entity.InstructorDetail;
+import main.oneToMany_uni.hibernate.entity.Review;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
 
-public class FetchJoin {
+public class DeleteCourseAndReviews {
 
     public static void main(String[] args) {
 
@@ -18,6 +18,7 @@ public class FetchJoin {
                 .addAnnotatedClass(Instructor.class)
                 .addAnnotatedClass(InstructorDetail.class)
                 .addAnnotatedClass(Course.class)
+                .addAnnotatedClass(Review.class)
                 .buildSessionFactory();
 
         //Create session
@@ -28,31 +29,23 @@ public class FetchJoin {
             //Start transaction
             session.beginTransaction();
 
-            //Get QUERY the instructor from DB
-            int theId = 2;
-            Query<Instructor> query =
-                    session.createQuery("select i from Instructor i "
-                            + "join fetch i.courses " + "where i.id=:instructorId",
-                            Instructor.class);
+            //Get the course
+            int tempId = 10;
+            Course course = session.get(Course.class, tempId);
 
-            //Set param in query
-            query.setParameter("instructorId", theId);
+            //Print the course
+            System.out.println("\nCourse is: " + course);
 
-            //Execute query & get Instructor
-            Instructor instructor = query.getSingleResult();
+            //Print the course reviews
+            System.out.println("\nReviews is: " + course.getReviews());
 
-            //Get courses for the instructor
-            System.out.println("Query Instructor: " + instructor);
-            System.out.println("Query Courses: " + instructor.getCourses());
+            //Delete the cource
+            System.out.println("Deleting the course");
+            session.delete(course);
 
             //Commit transaction
             session.getTransaction().commit();
-
-            session.close();
-            System.out.println("\nNow session is closed\n");
-            System.out.println("Query Courses: " + instructor.getCourses());
-
-            System.out.println("Query Done!");
+            System.out.println("Done!");
 
         } finally {
             session.close();

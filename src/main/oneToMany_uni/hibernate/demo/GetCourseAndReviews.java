@@ -3,11 +3,12 @@ package main.oneToMany_uni.hibernate.demo;
 import main.oneToMany_uni.hibernate.entity.Course;
 import main.oneToMany_uni.hibernate.entity.Instructor;
 import main.oneToMany_uni.hibernate.entity.InstructorDetail;
+import main.oneToMany_uni.hibernate.entity.Review;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class DeleteInstructorCourses {
+public class GetCourseAndReviews {
 
     public static void main(String[] args) {
 
@@ -17,6 +18,7 @@ public class DeleteInstructorCourses {
                 .addAnnotatedClass(Instructor.class)
                 .addAnnotatedClass(InstructorDetail.class)
                 .addAnnotatedClass(Course.class)
+                .addAnnotatedClass(Review.class)
                 .buildSessionFactory();
 
         //Create session
@@ -27,13 +29,15 @@ public class DeleteInstructorCourses {
             //Start transaction
             session.beginTransaction();
 
-            //Get a course
-            int theId = 10;
-            Course course = session.get(Course.class, theId);
+            //Get the course
+            int tempId = 10;
+            Course course = session.get(Course.class, tempId);
 
-            //Delete course
-            System.out.println("Deleting courses: " + course);
-            session.delete(course);
+            //Print the course
+            System.out.println("\nCourse is: " + course);
+
+            //Print the course reviews
+            System.out.println("\nReviews is: " + course.getReviews());
 
             //Commit transaction
             session.getTransaction().commit();
