@@ -1,1 +1,3 @@
-# HibernateDemo3
+OneToOne
+OneToMany
+ManyToMany
