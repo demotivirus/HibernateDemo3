@@ -1,14 +1,11 @@
 package main.manyToMany.hibernate.demo;
 
-import main.manyToMany.hibernate.entity.Course;
-import main.manyToMany.hibernate.entity.Instructor;
-import main.manyToMany.hibernate.entity.InstructorDetail;
-import main.manyToMany.hibernate.entity.Review;
+import main.manyToMany.hibernate.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class CreateCourseAndReviews {
+public class CreateCourseAndStudents {
 
     public static void main(String[] args) {
 
@@ -19,6 +16,7 @@ public class CreateCourseAndReviews {
                 .addAnnotatedClass(InstructorDetail.class)
                 .addAnnotatedClass(Course.class)
                 .addAnnotatedClass(Review.class)
+                .addAnnotatedClass(Student.class)
                 .buildSessionFactory();
 
         //Create session
@@ -30,19 +28,26 @@ public class CreateCourseAndReviews {
             session.beginTransaction();
 
             //Create the course
-            Course course = new Course("Monkey it's a funky");
+            Course course = new Course("How live in a Mexico");
 
-            //Add reviews
-            course.addReview(new Review("Not bad"));
-            course.addReview(new Review("Great"));
-            course.addReview(new Review("Wonderful"));
-
-            //Save the course & all cascade table it's save
-            System.out.println("Saving the course");
-            System.out.println(course);
-            System.out.println(course.getReviews());
-
+            //Save the course
+            System.out.println("Saving the course...");
             session.save(course);
+            System.out.println("Course saved: " + course);
+
+            //Create students
+            Student student = new Student("Mark", "Twain", "markTwain@gmail.com");
+            Student student1 = new Student("Albert", "Enshtein", "albertEnshtein@google.com");
+
+            //Add students to the course
+            course.addStudents(student);
+            course.addStudents(student1);
+
+            //Save the students
+            System.out.println("Saving the students...");
+            session.save(student);
+            session.save(student1);
+            System.out.println("Students saved: " + course.getStudents());
 
             //Commit transaction
             session.getTransaction().commit();
